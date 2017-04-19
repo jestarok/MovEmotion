@@ -12,10 +12,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -33,6 +35,35 @@ public class MainController {
 
     @FXML
     TextField txtImdbID = new TextField();
+
+    public void inicializarApp(Main mainApp) {
+        System.out.println("Inicializando el Punto de Venta...");
+        this.mainApp = mainApp;
+        mainApp.getPrimaryStage().getScene().setOnKeyReleased(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                switch (event.getCode()){
+                    case F2:
+                        System.out.println("Presionando F2");
+                        break;
+                    case F3:
+                        System.out.println("Presionando F3");
+                        break;
+                    case F4:
+                        System.out.println("Presionando F4");
+                        break;
+                    case F5:
+                        System.out.println("Presionando F5");
+                        break;
+                    case F6:
+                        System.out.println("Presionando F6");
+                        break;
+                }
+            }
+        });
+
+        //incluyendo el vendedor.
+    }
 
     public void buscarPeliculaPorNombre() {
 

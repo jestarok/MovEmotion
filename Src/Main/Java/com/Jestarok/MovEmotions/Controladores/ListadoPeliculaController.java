@@ -80,6 +80,21 @@ public class ListadoPeliculaController {
         peliculaSeleccionadoListener.addObserver(observer);
     }
 
+    @FXML
+    public void aceptar(){
+        System.out.println("Aceptando...");
+        ResumenPelicula tmp = tabla.getSelectionModel().getSelectedItem();
+        peliculaSeleccionadoListener.notify(null, tmp, null);
+        ventana.close();
+    }
+
+    @FXML
+    public void cancelar(){
+        System.out.println("Cancelar...");
+        ventana.close();
+    }
+
+
     public void setMainApp(Main mainApp){
         this.mainApp = mainApp;
     }

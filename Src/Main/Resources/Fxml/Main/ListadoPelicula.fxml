@@ -15,7 +15,7 @@
                 <TableColumn fx:id="nombreCol" prefWidth="337.0" text="Nombre" />
             </columns>
         </TableView>
-        <Button fx:id="btnCancelar" layoutX="284.0" layoutY="336.0" mnemonicParsing="false" text="Cancelar" AnchorPane.bottomAnchor="9.0" AnchorPane.rightAnchor="13.0" />
-        <Button fx:id="btnAceptar" layoutX="360.0" layoutY="335.0" mnemonicParsing="false" text="Aceptar" AnchorPane.bottomAnchor="9.0" AnchorPane.rightAnchor="107.0" />
+        <Button fx:id="btnCancelar" layoutX="284.0" layoutY="336.0" mnemonicParsing="false" onAction="#cancelar" text="Cancelar" AnchorPane.bottomAnchor="9.0" AnchorPane.rightAnchor="13.0" />
+        <Button fx:id="btnAceptar" layoutX="381.0" layoutY="335.0" mnemonicParsing="false" onAction="#aceptar" text="Aceptar" AnchorPane.bottomAnchor="9.0" AnchorPane.rightAnchor="86.0" />
     </children>
 </AnchorPane>

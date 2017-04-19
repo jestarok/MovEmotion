@@ -31,10 +31,15 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
 
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(Main.class.getResource("/Fxml/Main/Main.fxml"));
+
         Parent root = FXMLLoader.load(getClass().getResource("/Fxml/Main/Main.fxml"));
         Scene scene = new Scene(root,600,400);
         primaryStage.setTitle("FXML Welcome");
         primaryStage.setScene(scene);
+        MainController mainController = loader.getController();
+        mainController.inicializarApp(this);
         primaryStage.show();
 
 
