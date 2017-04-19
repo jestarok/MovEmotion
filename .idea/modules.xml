@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/MovEmotion.iml" filepath="$PROJECT_DIR$/.idea/modules/MovEmotion.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/MovEmotion_main.iml" filepath="$PROJECT_DIR$/.idea/modules/MovEmotion_main.iml" group="MovEmotion" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/MovEmotion_test.iml" filepath="$PROJECT_DIR$/.idea/modules/MovEmotion_test.iml" group="MovEmotion" />
+    </modules>
+  </component>
+</project>
