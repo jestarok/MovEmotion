@@ -21,6 +21,7 @@ import java.util.List;
 
 public class Main extends Application {
 
+    private Stage primaryStage;
 
     public static void main(String[] args) {
         Utilidades.agregarSerializacionUniRest();
@@ -37,5 +38,10 @@ public class Main extends Application {
         primaryStage.show();
 
 
+        this.primaryStage = primaryStage;
+    }
+
+    public Stage getPrimaryStage(){
+        return primaryStage;
     }
 }

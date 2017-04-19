@@ -11,6 +11,14 @@ public class ResumenPelicula {
     private String Type;
     private String Poster;
 
+    public ResumenPelicula(ResumenPelicula p) {
+        Title = p.Title;
+        Year = p.Year;
+        this.imdbID = p.imdbID;
+        Type = p.Type;
+        Poster = p.Poster;
+    }
+
     public String getTitle() {
         return Title;
     }

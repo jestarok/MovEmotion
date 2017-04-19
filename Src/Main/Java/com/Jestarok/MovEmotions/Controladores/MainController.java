@@ -2,12 +2,19 @@ package com.Jestarok.MovEmotions.Controladores;
 
 import com.Jestarok.MovEmotions.Encapsulaciones.WS.DatosPelicula;
 import com.Jestarok.MovEmotions.Encapsulaciones.WS.ResumenPelicula;
+import com.Jestarok.MovEmotions.Main.Main;
 import com.Jestarok.MovEmotions.Servicios.PeliculaServices;
+import com.Jestarok.MovEmotions.utilidades.IObserver;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 import java.util.List;
 
@@ -15,12 +22,17 @@ import java.util.List;
  * Created by Jestarok on 4/19/2017.
  */
 public class MainController {
+    Main mainApp;
+    ResumenPelicula resumenPeliculaSeleccionado;
 
     @FXML
     Button btnBuscar = new Button();
 
     @FXML
     TextField txtPelicula = new TextField();
+
+    @FXML
+    TextField txtImdbID = new TextField();
 
     public void buscarPeliculaPorNombre() {
 
@@ -43,6 +55,46 @@ public class MainController {
         System.out.println(txtPelicula.getText().toString());
     }
 
+
+    private void completarDatosCliente(ResumenPelicula tmp){
+        resumenPeliculaSeleccionado = tmp;
+        txtPelicula.setText(""+tmp.getTitle());
+        txtImdbID.setText(""+tmp.getImdbID());
+    }
+
+    private void visualizarListadoCliente(List<ResumenPelicula> listaCliente){
+        try {
+
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(Main.class.getResource("/Fxml/Main/ListadoPelicula.fxml"));
+            AnchorPane page = (AnchorPane) loader.load();
+
+            ListadoPeliculaController listadoPeliculaController = loader.getController();
+            listadoPeliculaController.setMainApp(mainApp);
+            listadoPeliculaController.cargarClientes(listaCliente);
+            listadoPeliculaController.addPeliculaSeleccionadoListener(new IObserver() {
+                @Override
+                public void update(Class clase, Object argumento, Enum anEnum) {
+                    completarDatosCliente((ResumenPelicula) argumento);
+                }
+            });
+
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("Listado de Peliculas");
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.setResizable(false);
+            dialogStage.initOwner(mainApp.getPrimaryStage());
+            listadoPeliculaController.setVentana(dialogStage);
+            Scene scene = new Scene(page);
+            dialogStage.setScene(scene);
+
+            //Mostrando y esperando el cierre.
+            dialogStage.showAndWait();
+
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
+    }
 
 
 /*
