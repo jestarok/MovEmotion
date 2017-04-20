@@ -34,6 +34,8 @@ public class MainController {
     Button btnBuscarID = new Button();
     @FXML
     Button btnBuscarNombre = new Button();
+    @FXML
+    Button Bayify = new Button();
 
     @FXML
     TextField txtPeliculaId = new TextField();
@@ -82,6 +84,9 @@ public class MainController {
         txtPeliculaId.setText(""+tmp.getImdbID());
     }
 
+    public  void callBayes(){
+        PeliculaServices.getInstance().readTest();
+    }
     private void visualizarListadoCliente(List<ResumenPelicula> listaCliente){
         try {
 

@@ -44,18 +44,20 @@
                   <TextField fx:id="txtPeliculaNombre" />
                </children>
             </HBox>
-            <Button fx:id="btnBuscarNombre" mnemonicParsing="false" onAction="#buscarPeliculaPorNombre" text="Buscar" />
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Label text="Codigo IMDB">
+                  <Button fx:id="btnBuscarNombre" mnemonicParsing="false" onAction="#buscarPeliculaPorNombre" text="Buscar">
                      <HBox.margin>
-                        <Insets right="5.0" />
+                        <Insets right="25.0" />
                      </HBox.margin>
-                  </Label>
-                  <TextField fx:id="txtPeliculaID" />
+                  </Button>
+                  <Button fx:id="Bayify" onAction="#callBayes" mnemonicParsing="false" text="Bayify">
+                     <HBox.margin>
+                        <Insets left="25.0" />
+                     </HBox.margin>
+                  </Button>
                </children>
             </HBox>
-            <Button fx:id="btnBuscarID" mnemonicParsing="false" onAction="#buscarPeliculaPorNombre" text="Buscar" />
          </children>
       </VBox>
    </children>

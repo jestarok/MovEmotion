@@ -31,8 +31,8 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+ArrayList<String> test = new ArrayList<>();
 
-        //PeliculaServices.getInstance().escribirTXT();
         Parent root = FXMLLoader.load(getClass().getResource("/Fxml/Main/Main.fxml"));
         init();
         Scene scene = new Scene(root,600,400);
