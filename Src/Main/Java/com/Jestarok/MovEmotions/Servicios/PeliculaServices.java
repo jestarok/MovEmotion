@@ -7,6 +7,14 @@ import com.Jestarok.MovEmotions.Encapsulaciones.WS.RetornoConsultaPeliculas;
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.Unirest;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,8 +47,11 @@ public class PeliculaServices {
      * @return
      */
     public List<ResumenPelicula> listaPeliculasPorBusqueda(String filtro) throws Exception{
+        System.out.printf(filtro);
+        String filter = filtro.replaceAll(" ","_");
+        System.out.printf(filter);
         List<ResumenPelicula> lista = new ArrayList<>(1);
-        String ruta = URL+"s="+filtro;
+        String ruta = URL+"s="+filter;
         System.out.println("Ruta "+ruta);
         //No puede ser vacio...
         if(filtro.trim().isEmpty()){
@@ -65,11 +76,45 @@ public class PeliculaServices {
         return lista;
     }
 
+    public void escribirTXT(){
+        ArrayList<String> codigos = new ArrayList<>();
+        ArrayList<String> descripciones = new ArrayList<>();
+        try {
+            File file = new File("C:\\Users\\mc\\Desktop\\x2.txt");
+            FileReader fileReader = new FileReader(file);
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+            StringBuffer stringBuffer = new StringBuffer();
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
+                codigos.add(line);
+            }
+            fileReader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        String temp;
+        for (String s: codigos) {
+            temp = "";
+            try{temp = buscarDescripcionPelicula(s);} catch (Exception e){ e.printStackTrace();}
+            descripciones.add(temp);
+            descripciones.add("\n");
+        }
+
+        try {
+            Path file = Paths.get("C:\\Users\\mc\\Desktop\\y2.txt");
+            Files.write(file, descripciones, Charset.forName("UTF-8"));
+        }
+        catch (Exception e){e.printStackTrace();}
+    }
+
     public String buscarDescripcionPelicula(String filtro)throws Exception{
-       String ruta = URL+"i="+filtro+"&plot=full";
+        System.out.printf(filtro);
+        String filter = filtro.replaceAll(" ","_");
+        System.out.printf(filter);
+       String ruta = URL+"i="+filter+"&plot=full";
         System.out.println("Ruta "+ruta);
         //No puede ser vacio...
-        if(filtro.trim().isEmpty()){
+        if(filter.trim().isEmpty()){
             System.out.println("Trama vacia....");
             return "N/A";
         }
@@ -90,19 +135,5 @@ public class PeliculaServices {
         return tmp.getPlot();
     }
 
-   /* public RetornoDataArticulo consultarDatosArticulo(String articuloId,String clienteID) throws Exception{
-        String ruta2 = URL+"/consultarArticuloFacturar ";
-        //List<PerfilPrecio> lista = consultarPerfilPrecio(articuloId,clienteID);
-        //segundo request, este llama la nueva funcionalidad del api "/consultarArticuloFacturar"
-        HttpResponse<RetornoDataArticulo> jsonResponse2 = Unirest.post(ruta2)
-                .header("accept", "application/json")
-                .field("secureToken", Main.usuarioMovil.getTokenFacturacion())
-                .field("articuloId", articuloId)
-                .field("clienteId", clienteID)
-                .field("monedaId", 31)//lista.get(0).getMoneda().getMonedaId())
-                .asObject(RetornoDataArticulo.class);
-        RetornoDataArticulo tmp2 =  jsonResponse2.getBody();
-        System.out.println("RetornoDataArticulo  "+ tmp2.toString());
-        return tmp2;
-    }*/
+
 }

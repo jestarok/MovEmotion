@@ -21,6 +21,7 @@ import java.util.List;
 
 public class Main extends Application {
 
+
     private Stage primaryStage;
 
     public static void main(String[] args) {
@@ -31,15 +32,12 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(Main.class.getResource("/Fxml/Main/Main.fxml"));
-
+        //PeliculaServices.getInstance().escribirTXT();
         Parent root = FXMLLoader.load(getClass().getResource("/Fxml/Main/Main.fxml"));
+        init();
         Scene scene = new Scene(root,600,400);
-        primaryStage.setTitle("FXML Welcome");
+        primaryStage.setTitle("MovEmotion");
         primaryStage.setScene(scene);
-        MainController mainController = loader.getController();
-        mainController.inicializarApp(this);
         primaryStage.show();
 
 

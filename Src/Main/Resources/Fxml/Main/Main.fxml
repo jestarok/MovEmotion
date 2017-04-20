@@ -41,10 +41,21 @@
                         <Insets right="5.0" />
                      </HBox.margin>
                   </Label>
-                  <TextField fx:id="txtPelicula" />
+                  <TextField fx:id="txtPeliculaNombre" />
                </children>
             </HBox>
-            <Button fx:id="btnBuscar" mnemonicParsing="false" onAction="#buscarPeliculaPorNombre" text="Buscar" />
+            <Button fx:id="btnBuscarNombre" mnemonicParsing="false" onAction="#buscarPeliculaPorNombre" text="Buscar" />
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label text="Codigo IMDB">
+                     <HBox.margin>
+                        <Insets right="5.0" />
+                     </HBox.margin>
+                  </Label>
+                  <TextField fx:id="txtPeliculaID" />
+               </children>
+            </HBox>
+            <Button fx:id="btnBuscarID" mnemonicParsing="false" onAction="#buscarPeliculaPorNombre" text="Buscar" />
          </children>
       </VBox>
    </children>

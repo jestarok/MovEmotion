@@ -10,8 +10,10 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.util.List;
@@ -30,6 +32,15 @@ public class ListadoPeliculaController {
     @FXML
     private TableView<ResumenPelicula> tabla;
 
+    @FXML
+    private TableColumn<ResumenPelicula, String> idCol, nombreCol;
+
+    @FXML
+    public void initialize() {
+        idCol.setCellValueFactory( new PropertyValueFactory<>("imdbID"));
+        nombreCol.setCellValueFactory( new PropertyValueFactory<>("Title"));
+
+    }
     private SubjectHelper peliculaSeleccionadoListener = new SubjectHelper();
 
     private ObservableList<ResumenPelicula> data = FXCollections.observableArrayList();

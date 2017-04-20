@@ -20,8 +20,8 @@ public class DatosPelicula {
     String Awards;
     String Poster;
     Object Ratings;
-    int Metascore;
-    double imdbRating;
+    String Metascore;
+    String imdbRating;
     String imdbVotes;
     String imdbID;
     String Type;

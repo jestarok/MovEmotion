@@ -11,7 +11,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
@@ -28,41 +31,21 @@ public class MainController {
     ResumenPelicula resumenPeliculaSeleccionado;
 
     @FXML
-    Button btnBuscar = new Button();
+    Button btnBuscarID = new Button();
+    @FXML
+    Button btnBuscarNombre = new Button();
 
     @FXML
-    TextField txtPelicula = new TextField();
+    TextField txtPeliculaId = new TextField();
 
     @FXML
-    TextField txtImdbID = new TextField();
+    TextField txtPeliculaNombre = new TextField();
+
 
     public void inicializarApp(Main mainApp) {
         System.out.println("Inicializando el Punto de Venta...");
         this.mainApp = mainApp;
-        mainApp.getPrimaryStage().getScene().setOnKeyReleased(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent event) {
-                switch (event.getCode()){
-                    case F2:
-                        System.out.println("Presionando F2");
-                        break;
-                    case F3:
-                        System.out.println("Presionando F3");
-                        break;
-                    case F4:
-                        System.out.println("Presionando F4");
-                        break;
-                    case F5:
-                        System.out.println("Presionando F5");
-                        break;
-                    case F6:
-                        System.out.println("Presionando F6");
-                        break;
-                }
-            }
-        });
 
-        //incluyendo el vendedor.
     }
 
     public void buscarPeliculaPorNombre() {
@@ -71,9 +54,9 @@ public class MainController {
 
 
         try {
-            List<ResumenPelicula> lista = PeliculaServices.getInstance().listaPeliculasPorBusqueda(txtPelicula.getText());
+            List<ResumenPelicula> lista = PeliculaServices.getInstance().listaPeliculasPorBusqueda(txtPeliculaNombre.getText());
             if (lista.size() > 1) {
-                //visualizarListadoCliente(lista);
+                visualizarListadoCliente(lista);
             } else if(lista.size() == 1){
                 PeliculaServices.getInstance().buscarDescripcionPelicula(lista.get(0).getImdbID());
             }/* else {
@@ -83,14 +66,20 @@ public class MainController {
             e.printStackTrace();
         }
 
-        System.out.println(txtPelicula.getText().toString());
+        System.out.println(txtPeliculaNombre.getText().toString());
     }
 
 
     private void completarDatosCliente(ResumenPelicula tmp){
         resumenPeliculaSeleccionado = tmp;
-        txtPelicula.setText(""+tmp.getTitle());
-        txtImdbID.setText(""+tmp.getImdbID());
+        try {
+            String desc = PeliculaServices.getInstance().buscarDescripcionPelicula(tmp.getImdbID());
+            System.out.println(desc);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        txtPeliculaNombre.setText(""+tmp.getTitle());
+        txtPeliculaId.setText(""+tmp.getImdbID());
     }
 
     private void visualizarListadoCliente(List<ResumenPelicula> listaCliente){
@@ -114,7 +103,6 @@ public class MainController {
             dialogStage.setTitle("Listado de Peliculas");
             dialogStage.initModality(Modality.WINDOW_MODAL);
             dialogStage.setResizable(false);
-            dialogStage.initOwner(mainApp.getPrimaryStage());
             listadoPeliculaController.setVentana(dialogStage);
             Scene scene = new Scene(page);
             dialogStage.setScene(scene);

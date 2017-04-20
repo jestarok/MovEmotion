@@ -12,7 +12,7 @@
         <TableView fx:id="tabla" layoutX="13.0" layoutY="47.0" prefHeight="283.0" prefWidth="347.0" AnchorPane.bottomAnchor="41.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="47.0">
             <columns>
                 <TableColumn fx:id="idCol" prefWidth="160.0" text="Codigo" />
-                <TableColumn fx:id="nombreCol" prefWidth="337.0" text="Nombre" />
+                <TableColumn fx:id="nombreCol" prefWidth="337.0" text="Title" />
             </columns>
         </TableView>
         <Button fx:id="btnCancelar" layoutX="284.0" layoutY="336.0" mnemonicParsing="false" onAction="#cancelar" text="Cancelar" AnchorPane.bottomAnchor="9.0" AnchorPane.rightAnchor="13.0" />
